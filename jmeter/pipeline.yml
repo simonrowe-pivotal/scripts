@@ -1,0 +1,89 @@
+resources:
+- name: repo
+  type: git
+  source:
+    uri: https://github.com/simonrowe-pivotal/jmeter-on-concourse.git
+    branch: ((git-))
+- name: cf
+  type: cf
+  source:
+    api: ((cf-api))
+    username: ((cf-username))
+    password: ((cf-password))
+    organization: ((cf-org))
+    space: ((cf-space))
+    skip_cert_check: true
+jobs:
+- name: perf-test
+  plan:
+  - get: repo
+  - task: run-jmeter
+    params:
+      protocol: ((protocol))
+      uaa_path: ((uaa_path))
+      uaa_domain: ((uaa_domain))
+      username: ((username))
+      password: ((password))
+      client_id: ((client_id))
+      client_secret: ((client_secret))
+      redirect_uri: ((redirect_uri))
+      uaa_port: ((uaa_port))
+      uaa_token_path: ((uaa_token_path))
+      uaa_login_path: ((uaa_login_path))
+      uaa_logout_path: ((uaa_logout_path))
+      uaa_authorize_path: ((uaa_authorize_path))
+      web_ui_protocol: ((web_ui_protocol))
+      web_ui_port: ((web_ui_port))
+      web_ui_domain: ((web_ui_domain))
+      web_ui_oauth_authorization_path: ((web_ui_oauth_authorization_path))
+      web_ui_oauth2_login_path: ((web_ui_oauth2_login_path))
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: justb4/jmeter
+      inputs:
+      -  name: repo
+      outputs:
+      - name: report
+      run:
+        path: bash
+        args: 
+        - -c
+        - |
+          set -e
+          cd repo
+
+          jmeter -Dlog_level.jmeter=DEBUG \
+            -J protocol=${protocol} \
+            -J uaa_path=${uaa_path} \
+            -J uaa_domain=${uaa_domain} \
+            -J username=${username} \
+            -J password=${password} \
+            -J client_id=${client_id} \
+            -J client_secret=${client_secret} \
+            -J redirect_uri=${redirect_uri} \
+            -J uaa_port=${uaa_port} \
+            -J uaa_token_path=${uaa_token_path} \
+            -J uaa_login_path=${uaa_login_path} \
+            -J uaa_logout_path=${uaa_logout_path} \
+            -J uaa_authorize_path=${uaa_authorize_path} \
+            -J web_ui_protocol=${web_ui_protocol} \
+            -J web_ui_port=${web_ui_port} \
+            -J web_ui_domain=${web_ui_domain} \
+            -J web_ui_oauth_authorization_path=${web_ui_oauth_authorization_path} \
+            -J web_ui_oauth2_login_path=${web_ui_oauth2_login_path}} \
+            -n -t jmeter/pivotal-bank.jmx -l test.jtl -j jmeter.log \
+            -e -o ../report
+
+          echo "==== jmeter.log ===="
+          cat ./jmeter.log
+
+          echo "==== Raw Test Report ===="
+          cat ./test.jtl
+  - put: cf
+    params:
+      manifest: repo/manifest.yml
+      path: report
+      current_app_name: demo-jemeter-report

@@ -2,8 +2,8 @@ resources:
 - name: repo
   type: git
   source:
-    uri: https://github.com/simonrowe-pivotal/jmeter-on-concourse.git
-    branch: ((git-))
+    uri: ((git-repo))
+    branch: ((git-branch))
 - name: cf
   type: cf
   source:

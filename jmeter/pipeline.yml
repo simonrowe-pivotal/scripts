@@ -82,10 +82,6 @@ jobs:
             -n -t jmeter/pivotal-bank.jmx -l test.jtl -j jmeter.log \
             -e -o ../report
 
-
-
-          echo "==== Raw Test Report ===="
-          cat ./test.jtl
   - put: cf
     params:
       manifest: repo/jmeter/manifest.yml

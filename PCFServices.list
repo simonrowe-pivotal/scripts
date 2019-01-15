@@ -12,3 +12,4 @@ newrelic newrelic newrelic
 ####### uaa-admin user provided service
 uaa-admin user-provided uaa-admin
 app-autoscaler standard app-autoscaler
+p.redis cache-small redis

@@ -21,6 +21,22 @@ deploy()
   fi
 }
 
+autoscale()
+{
+  file="microServices.list"
+  while IFS= read -r app
+  do
+    if [ ! "${app:0:1}" == "#" ]
+    then
+      app_name=`echo "$app" | cut -d " " -f 2`
+      cf delete-autoscaling-rules $app_name --force
+      cf enable-autoscaling $app_name
+      cf configure-autoscaling $app_name autoscaler-manifest.yml
+    fi
+  done < "$file"
+  wait
+}
+
 main()
 {
   file="microServices.list"
@@ -33,12 +49,14 @@ main()
     fi
   done < "$file"
   wait
-  
+
+
   summaryOfApps
   summaryOfServices
 }
 
 main
+autoscale
 
 printf "\nExecuted $SCRIPTNAME in $SECONDS seconds.\n"
 exit 0

@@ -11,3 +11,4 @@ p-identity pivotal-bank-sso pivotal-bank-sso
 newrelic newrelic newrelic
 ####### uaa-admin user provided service
 uaa-admin user-provided uaa-admin
+app-autoscaler standard app-autoscaler

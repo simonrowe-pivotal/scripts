@@ -142,7 +142,7 @@
             <boolProp name="Cookie.path_specified">true</boolProp>
             <boolProp name="Cookie.domain_specified">true</boolProp>
           </elementProp>
-          <elementProp name="JSESSIONID" elementType="Cookie" testname="JSESSIONID">
+          <elementProp name="SESSION" elementType="Cookie" testname="SESSION">
             <stringProp name="Cookie.value">${__P(PIVOTAL_BANK_JSESSIONID)}</stringProp>
             <stringProp name="Cookie.domain">${web_ui_domain}</stringProp>
             <stringProp name="Cookie.path"></stringProp>
@@ -214,7 +214,7 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extractor PIVOTAL_BANK_JSESSION ID" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">true</stringProp>
             <stringProp name="RegexExtractor.refname">PIVOTAL_BANK_JSESSIONID</stringProp>
-            <stringProp name="RegexExtractor.regex">JSESSIONID=([^;]*);</stringProp>
+            <stringProp name="RegexExtractor.regex">SESSION=([^;]*);</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number"></stringProp>

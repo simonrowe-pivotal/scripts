@@ -74,6 +74,7 @@ main()
 turnoffautoscalling
 main
 autoscale
+cf add-network-policy webtrader --destination-app portfolio
 
 printf "\nExecuted $SCRIPTNAME in $SECONDS seconds.\n"
 exit 0

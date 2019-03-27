@@ -6,7 +6,7 @@ p.mysql db-small traderdb
 # Uncomment if usng PWS
 #cleardb spark traderdb
 ####### SSO
-p-identity pivotal-bank-sso-one pivotal-bank-sso
+p-identity pivotal-bank-sso pivotal-bank-sso
 ####### NewRelic
 newrelic newrelic newrelic
 ####### uaa-admin user provided service

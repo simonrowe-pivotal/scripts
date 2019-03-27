@@ -9,7 +9,7 @@ uaac client add $UAA_ZONEADMIN_CLIENT_ID --authorities zones.write,scim.zones,zo
 
 uaac target $UAA_ENDPOINT --skip-ssl-validation
 uaac token client get $UAA_ZONEADMIN_CLIENT_ID -s $UAA_ZONEADMIN_CLIENT_SECRET
-uaac group add pivotal.bank -z pivotal-bank-sso-one
-uaac group add trade -z pivotal-bank-sso-one
-uaac group add account -z pivotal-bank-sso-one
-uaac group add portfolio -z pivotal-bank-sso-one
+uaac group add pivotal.bank -z pivotal-bank-sso
+uaac group add trade -z pivotal-bank-sso
+uaac group add account -z pivotal-bank-sso
+uaac group add portfolio -z pivotal-bank-sso

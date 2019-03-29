@@ -1,6 +1,6 @@
-quotes-service
-user-service
-accounts-service
-portfolio-service
+quotes-service quotes
+user-service users
+accounts-service accounts
+portfolio-service portfolio
 # The app when deployed is called webtrader but lives in folder web-ui. Leave this line as is and the scripts has some "hacks" to cope :(
-web-ui
+web-ui webtrader

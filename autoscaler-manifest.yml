@@ -1,0 +1,9 @@
+---
+instance_limits:
+  min: 1
+  max: 4
+rules:
+- rule_type: "cpu"
+  threshold:
+    min: 30
+    max: 70
